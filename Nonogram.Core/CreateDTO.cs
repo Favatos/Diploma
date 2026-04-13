@@ -1,0 +1,17 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Shared;
+
+public class CreateDTO
+{
+    [Required]
+    public string Name { get; set; } = null!;
+    [Required]
+    [Range(5, 25)]
+    public int Width { get; set; }
+    [Required]
+    [Range(5, 25)]
+    public int Height { get; set; }
+    [Required]
+    public string GridJson { get; set; } = null!;
+}

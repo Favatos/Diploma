@@ -4,7 +4,16 @@ public class GameSession
 {
     public Nonogram Nonogram { get; set; }
     public int[][] CurrentGrid { get; set; }
-    public int Lives { get; set; }
+    int lives;
+    public int Lives 
+    {
+        get => lives;
+        set
+        {
+            lives = value;
+            PropertyChanged?.Invoke(nameof(Lives));
+        }
+    }
     public Status Status { get; set; }
 
     public GameSession(Nonogram nonogram, int lives) { 
@@ -134,6 +143,8 @@ public class GameSession
         Console.WriteLine("right");
         return true;
     }
+
+    public event Action<string> PropertyChanged;
 }
 
 public enum Status

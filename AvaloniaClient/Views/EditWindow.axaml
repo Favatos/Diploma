@@ -1,0 +1,63 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:AvaloniaClient.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaClient.EditWindow"
+        x:DataType="vm:EditWindowVm"
+        Title="EditWindow">
+  
+
+    <Design.DataContext>
+        <vm:EditWindowVm/>
+    </Design.DataContext>
+
+    <DockPanel>
+		<StackPanel Orientation="Horizontal" Spacing="10" DockPanel.Dock="Top">
+                <TextBlock Text="Name"/>
+				<TextBox Text="{Binding CreateDTO.Name}"/>
+            </StackPanel>
+
+        <UniformGrid Rows="1" Columns="2" DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="Width"/>
+				<TextBox Text="{Binding Width}"/>
+            </StackPanel>
+			
+			<StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="Height"/>
+				<TextBox Text="{Binding Height}"/>
+            </StackPanel>
+        </UniformGrid>
+
+        <TextBlock Text="Difficulty will be calculated automatically" DockPanel.Dock="Top"/>
+
+        <Button Command="{Binding Save}" Content="Save" DockPanel.Dock="Bottom"/>
+
+        <Viewbox Margin="10">
+        <ItemsControl ItemsSource="{Binding Cells}" Grid.Row="1" Grid.Column="1">
+		        <!-- поменять панель -->
+                <ItemsControl.ItemsPanel>
+			        <ItemsPanelTemplate>
+				        <UniformGrid Rows="{Binding Height}" Columns="{Binding Width}" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <!-- поменять шаблон данных -->
+                <ItemsControl.ItemTemplate>
+			        <DataTemplate DataType="vm:EditCellVm">
+				        <Button Background="{Binding BackgroundBrush}"
+                                Command="{Binding Click}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Height="20"
+                                Width="20">
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl> 
+            </Viewbox>
+
+    </DockPanel>
+</Window>

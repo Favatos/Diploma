@@ -80,6 +80,11 @@ public class NonogramController : Controller
             return BadRequest("Grid is empty");
         }
 
+        if(String.IsNullOrEmpty(vm.Name))
+        {
+            return BadRequest("Name is empty");
+        }
+
         int[][] solution = JsonSerializer.Deserialize<int[][]>(vm.GridJson)!;
 
         NonogramEntity entity = new()

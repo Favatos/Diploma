@@ -1,0 +1,95 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:AvaloniaClient.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaClient.LevelsWindow"
+        x:DataType="vm:LevelsWindowVm"
+        Title="LevelsWindow">
+        
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+       <vm:LevelsWindowVm/>
+    </Design.DataContext>
+
+    <StackPanel Spacing="10">
+        <Button Command="{Binding OpenEditor}"
+                Content="Create nonogram"/>
+        <TextBlock Text="Easy"/>
+		<ItemsControl ItemsSource="{Binding LevelsEasy}">
+            <ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel ItemSpacing="10" ItemHeight="100" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+				<DataTemplate DataType="vm:LevelVm">
+					<Button 
+                        Width="120"
+                        Height="120"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="Purple"
+                        Command="{Binding ClickCommand}"
+                        Content="{Binding Nonogram.Name}"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                    />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <TextBlock Text="Medium"/>
+		<ItemsControl ItemsSource="{Binding LevelsMedium}">
+            <ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel ItemSpacing="10" ItemHeight="100" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+				<DataTemplate DataType="vm:LevelVm">
+					<Button 
+                        Width="120"
+                        Height="120"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="Purple"
+                        Command="{Binding ClickCommand}"
+                        Content="{Binding Nonogram.Name}"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                    />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <TextBlock Text="Hard"/>
+        <ItemsControl ItemsSource="{Binding LevelsHard}">
+            <ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel ItemSpacing="10" ItemHeight="100" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+				<DataTemplate DataType="vm:LevelVm">
+					<Button 
+                        Width="120"
+                        Height="120"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="Purple"
+                        Command="{Binding ClickCommand}"
+                        Content="{Binding Nonogram.Name}"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                    />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</Window>

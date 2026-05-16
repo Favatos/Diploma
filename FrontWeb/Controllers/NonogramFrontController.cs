@@ -12,7 +12,7 @@ public class NonogramFrontController : Controller
         this.factory = factory;
     }
 
-    [HttpGet("/index")]
+    [HttpGet("/")]
     public async Task<IActionResult> Index()
     {
         HttpClient client = factory.CreateClient();

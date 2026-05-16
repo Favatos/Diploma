@@ -1,0 +1,74 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:avaloniaclient="using:AvaloniaClient"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaClient.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaClient.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AvaloniaClient"
+        >
+
+    <Window.Styles>
+        <Style Selector="Window">
+		    <Setter Property="Background" Value="#E6E8F5" />
+        </Style>
+
+        <Style Selector="TextBlock.Lives">
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+
+        <Style Selector="TextBlock">
+			<Setter Property="Foreground" Value="#490092"/>
+        </Style>
+    </Window.Styles>
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+
+    <DockPanel>
+        <TextBlock Classes="Lives">
+            <Run Text="Lives: "/>
+            <Run Text="{Binding Lives}"/>
+        </TextBlock>
+        <Viewbox Margin="30">
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, Auto">
+                <avaloniaclient:TopHintControll x:Name="TopHints" Grid.Row="0" Grid.Column="1"/>
+                <avaloniaclient:LeftHintControll x:Name="LeftHints" Grid.Row="1" Grid.Column="0"/>
+             <ItemsControl ItemsSource="{Binding CellVms}" Grid.Row="1" Grid.Column="1">
+		        <!-- поменять панель -->
+                <ItemsControl.ItemsPanel>
+			        <ItemsPanelTemplate>
+				        <UniformGrid Rows="{Binding Nonogram.Height}" Columns="{Binding Nonogram.Width}" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <!-- поменять шаблон данных -->
+                <ItemsControl.ItemTemplate>
+			        <DataTemplate DataType="vm:CellVm">
+                        <Border BorderBrush="{Binding BorderBrush}" BorderThickness="1" CornerRadius="3" Margin="1"> 
+							<Rectangle Classes="cell"
+                                   Fill="{Binding BackgroundBrush}"
+                                   Height="20"
+                                   Width="20"
+                                   RadiusX="3"
+                                   RadiusY="3"
+                                   >
+							    <Interaction.Behaviors>
+						            <EventTriggerBehavior EventName="PointerPressed">
+							            <InvokeCommandAction Command="{Binding Click}" PassEventArgsToCommand="True"/>
+                                    </EventTriggerBehavior>
+                            </Interaction.Behaviors>
+                            </Rectangle>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl> 
+        </Grid>
+        </Viewbox>
+    </DockPanel>
+</Window>

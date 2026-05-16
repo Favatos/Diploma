@@ -23,6 +23,17 @@
         <Style Selector="TextBlock">
 			<Setter Property="Foreground" Value="#490092"/>
         </Style>
+        
+        <Style Selector="Button.cell">
+	      <Setter Property="BorderBrush" Value="#BFAEDC"/>
+          <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPointerOver}" />
+            <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundPointerOver}" />
+        </Style>
     </Window.Styles>
 
     <Design.DataContext>

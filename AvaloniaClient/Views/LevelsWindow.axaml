@@ -7,6 +7,33 @@
         x:Class="AvaloniaClient.LevelsWindow"
         x:DataType="vm:LevelsWindowVm"
         Title="LevelsWindow">
+
+    <Window.Styles>
+        <Style Selector="Window">
+		    <Setter Property="Background" Value="#E6E8F5" />
+        </Style>
+
+        <Style Selector="TextBlock.Lives">
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+
+        <Style Selector="TextBlock">
+			<Setter Property="Foreground" Value="#490092"/>
+        </Style>
+
+         <Style Selector="Button">
+	      <Setter Property="BorderBrush" Value="#BFAEDC"/>
+          <Setter Property="BorderThickness" Value="3"/>
+          <Setter Property="Foreground" Value="#490092"/>
+             <Setter Property="CornerRadius" Value="3"/>
+        </Style>
+
+         <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="BorderBrush" Value="#BFAEDC"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Foreground" Value="#490092"/>
+        </Style>
+    </Window.Styles>
         
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -14,14 +41,16 @@
        <vm:LevelsWindowVm/>
     </Design.DataContext>
 
-    <StackPanel Spacing="10">
+    <ScrollViewer>
+    <StackPanel Spacing="10" Margin="10">
         <Button Command="{Binding OpenEditor}"
+                Padding="10"
                 Content="Create nonogram"/>
         <TextBlock Text="Easy"/>
 		<ItemsControl ItemsSource="{Binding LevelsEasy}">
             <ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
-					<WrapPanel ItemSpacing="10" ItemHeight="100" />
+					<WrapPanel ItemSpacing="10" ItemHeight="130" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
 
@@ -32,7 +61,6 @@
                         Height="120"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Background="Purple"
                         Command="{Binding ClickCommand}"
                         Content="{Binding Nonogram.Name}"
                         HorizontalContentAlignment="Center"
@@ -46,7 +74,7 @@
 		<ItemsControl ItemsSource="{Binding LevelsMedium}">
             <ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
-					<WrapPanel ItemSpacing="10" ItemHeight="100" />
+					<WrapPanel ItemSpacing="10" ItemHeight="130" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
 
@@ -57,7 +85,6 @@
                         Height="120"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Background="Purple"
                         Command="{Binding ClickCommand}"
                         Content="{Binding Nonogram.Name}"
                         HorizontalContentAlignment="Center"
@@ -71,7 +98,7 @@
         <ItemsControl ItemsSource="{Binding LevelsHard}">
             <ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
-					<WrapPanel ItemSpacing="10" ItemHeight="100" />
+					<WrapPanel ItemSpacing="10" ItemHeight="130" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
 
@@ -82,7 +109,6 @@
                         Height="120"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Background="Purple"
                         Command="{Binding ClickCommand}"
                         Content="{Binding Nonogram.Name}"
                         HorizontalContentAlignment="Center"
@@ -92,4 +118,5 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
     </StackPanel>
+    </ScrollViewer>
 </Window>

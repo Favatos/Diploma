@@ -13,10 +13,13 @@ public partial class EditCellVm : ViewModelBase
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(BackgroundBrush))]
+    [NotifyPropertyChangedFor(nameof(BorderBrush))]
     private State state;
 
     public IBrush BackgroundBrush
-        => State == State.Blank ? Brushes.White : Brushes.Black;
+        => State == State.Blank ? Brushes.White : SolidColorBrush.Parse("#490092");
+    public IBrush BorderBrush
+        => State == State.Colored ? SolidColorBrush.Parse("#BDBDBD") : SolidColorBrush.Parse("#BFAEDC");
 
     public EditCellVm(int row, int col, EditWindowVm vm)
     {

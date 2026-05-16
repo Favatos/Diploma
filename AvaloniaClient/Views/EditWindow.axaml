@@ -7,33 +7,89 @@
         x:Class="AvaloniaClient.EditWindow"
         x:DataType="vm:EditWindowVm"
         Title="EditWindow">
-  
+    
+     <Window.Styles>
+        <Style Selector="Window">
+		    <Setter Property="Background" Value="#E6E8F5" />
+        </Style>
+
+        <Style Selector="TextBlock.Lives">
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+
+        <Style Selector="TextBlock">
+			<Setter Property="Foreground" Value="#490092"/>
+        </Style>
+
+         <Style Selector="Button">
+	      <Setter Property="BorderBrush" Value="#BFAEDC"/>
+          <Setter Property="BorderThickness" Value="3"/>
+          <Setter Property="Foreground" Value="#490092"/>
+        </Style>
+
+         <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="BorderBrush" Value="#BFAEDC"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Foreground" Value="#490092"/>
+        </Style>
+
+         <Style Selector="TextBox">
+			 <Setter Property="BorderBrush" Value="#BFAEDC"/>
+             <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Foreground" Value="#490092"/>
+            <Setter Property="Background" Value="#E6E8F5"/>
+         </Style>
+
+        <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="BorderBrush" Value="#BFAEDC"/>
+             <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Background" Value="#E6E8F5"/>
+        </Style>
+
+         <Style Selector="TextBox:pointerover">
+            <Setter Property="Foreground" Value="#490092"/>
+        </Style>
+
+         <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="BorderBrush" Value="#BFAEDC"/>
+             <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Background" Value="#E6E8F5"/>
+        </Style>
+
+         <Style Selector="TextBox:focus">
+            <Setter Property="Foreground" Value="#490092"/>
+             <Setter Property="CaretBrush" Value="#490092"/>
+        </Style>
+    </Window.Styles>
 
     <Design.DataContext>
         <vm:EditWindowVm/>
     </Design.DataContext>
 
     <DockPanel>
-		<StackPanel Orientation="Horizontal" Spacing="10" DockPanel.Dock="Top">
-                <TextBlock Text="Name"/>
+        <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Spacing="10" Margin="10">
+			<DockPanel HorizontalSpacing="10">
+                <TextBlock Text="Name" DockPanel.Dock="Left" VerticalAlignment="Center"/>
 				<TextBox Text="{Binding CreateDTO.Name}"/>
-            </StackPanel>
+            </DockPanel>
 
-        <UniformGrid Rows="1" Columns="2" DockPanel.Dock="Top">
+        <UniformGrid Rows="1" Columns="2">
             <StackPanel Orientation="Horizontal" Spacing="10">
-                <TextBlock Text="Width"/>
+                <TextBlock Text="Width" VerticalAlignment="Center"/>
 				<TextBox Text="{Binding Width}"/>
             </StackPanel>
 			
 			<StackPanel Orientation="Horizontal" Spacing="10">
-                <TextBlock Text="Height"/>
+                <TextBlock Text="Height" VerticalAlignment="Center"/>
 				<TextBox Text="{Binding Height}"/>
             </StackPanel>
         </UniformGrid>
 
         <TextBlock Text="Difficulty will be calculated automatically" DockPanel.Dock="Top"/>
+        </StackPanel>
+		
 
-        <Button Command="{Binding Save}" Content="Save" DockPanel.Dock="Bottom"/>
+        <Button Command="{Binding Save}" Content="Save" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Padding="10" Margin="10"/>
 
         <Viewbox Margin="10">
         <ItemsControl ItemsSource="{Binding Cells}" Grid.Row="1" Grid.Column="1">
@@ -47,13 +103,21 @@
                 <!-- поменять шаблон данных -->
                 <ItemsControl.ItemTemplate>
 			        <DataTemplate DataType="vm:EditCellVm">
-				        <Button Background="{Binding BackgroundBrush}"
-                                Command="{Binding Click}"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Height="20"
-                                Width="20">
-                        </Button>
+				        <Border BorderBrush="{Binding BorderBrush}" BorderThickness="1" CornerRadius="3" Margin="1"> 
+							<Rectangle Classes="cell"
+                                   Fill="{Binding BackgroundBrush}"
+                                   Height="20"
+                                   Width="20"
+                                   RadiusX="3"
+                                   RadiusY="3"
+                                   >
+							    <Interaction.Behaviors>
+						            <EventTriggerBehavior EventName="PointerPressed">
+							            <InvokeCommandAction Command="{Binding Click}" PassEventArgsToCommand="True"/>
+                                    </EventTriggerBehavior>
+                            </Interaction.Behaviors>
+                            </Rectangle>
+                        </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl> 

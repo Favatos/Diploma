@@ -20,6 +20,7 @@ namespace AvaloniaClient
                 .WithDeveloperTools()
 #endif
                 .WithInterFont()
-                .LogToTrace();
+                .LogToTrace()
+                .WithDataAnnotationsValidation();
     }
 }

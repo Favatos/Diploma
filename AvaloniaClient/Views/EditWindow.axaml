@@ -70,18 +70,18 @@
         <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Spacing="10" Margin="10">
 			<DockPanel HorizontalSpacing="10">
                 <TextBlock Text="Name" DockPanel.Dock="Left" VerticalAlignment="Center"/>
-				<TextBox Text="{Binding CreateDTO.Name}"/>
+				<TextBox Text="{Binding Name}"/>
             </DockPanel>
 
         <UniformGrid Rows="1" Columns="2">
             <StackPanel Orientation="Horizontal" Spacing="10">
                 <TextBlock Text="Width" VerticalAlignment="Center"/>
-				<TextBox Text="{Binding Width}"/>
+				<TextBox Text="{Binding Width, UpdateSourceTrigger=LostFocus}"/>
             </StackPanel>
 			
 			<StackPanel Orientation="Horizontal" Spacing="10">
                 <TextBlock Text="Height" VerticalAlignment="Center"/>
-				<TextBox Text="{Binding Height}"/>
+				<TextBox Text="{Binding Height, UpdateSourceTrigger=LostFocus}"/>
             </StackPanel>
         </UniformGrid>
 

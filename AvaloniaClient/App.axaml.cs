@@ -24,7 +24,6 @@ namespace AvaloniaClient
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                //desktop.MainWindow = new MainWindow(1);
                 desktop.MainWindow = new LevelsWindow();
             }
 

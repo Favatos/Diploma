@@ -96,13 +96,13 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         if (Session.Status == Status.Lost) 
         {
-            var mBox =  MessageBoxManager.GetMessageBoxStandard("Проигрыш", "Игра окончена");
+            var mBox =  MessageBoxManager.GetMessageBoxStandard("Loss", "Game over");
             await mBox.ShowAsync();
             CloseWindow();
         }
         else if (Session.Status == Status.Win)
         {
-            var mBox = MessageBoxManager.GetMessageBoxStandard("Победа", "Вы выиграли");
+            var mBox = MessageBoxManager.GetMessageBoxStandard("Win", "You win");
             await mBox.ShowAsync();
             CloseWindow();
         }

@@ -1,4 +1,5 @@
-﻿using Avalonia.Media;
+﻿using Avalonia.Input;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
@@ -42,8 +43,6 @@ public partial class EditCellVm : ViewModelBase
             State = State.Blank;
             Vm.Grid[Row][Col] = 0;
         }
-    }
-
-        
+    }   
 }
 

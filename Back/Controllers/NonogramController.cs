@@ -74,7 +74,6 @@ public class NonogramController : Controller
     [HttpPost("/create")]
     public async Task<IActionResult> Create(CreateDTO vm)
     {
-        //if (!ModelState.IsValid) return BadRequest();
         if (!vm.GridJson.Contains('1'))
         {
             return BadRequest("Grid is empty");

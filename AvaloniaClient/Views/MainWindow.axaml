@@ -42,7 +42,7 @@
 
 
     <DockPanel>
-        <TextBlock Classes="Lives">
+        <TextBlock Classes="Lives" DockPanel.Dock="Top">
             <Run Text="Lives: "/>
             <Run Text="{Binding Lives}"/>
         </TextBlock>
@@ -51,14 +51,12 @@
                 <avaloniaclient:TopHintControll x:Name="TopHints" Grid.Row="0" Grid.Column="1"/>
                 <avaloniaclient:LeftHintControll x:Name="LeftHints" Grid.Row="1" Grid.Column="0"/>
              <ItemsControl ItemsSource="{Binding CellVms}" Grid.Row="1" Grid.Column="1">
-		        <!-- поменять панель -->
                 <ItemsControl.ItemsPanel>
 			        <ItemsPanelTemplate>
 				        <UniformGrid Rows="{Binding Nonogram.Height}" Columns="{Binding Nonogram.Width}" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
-                <!-- поменять шаблон данных -->
                 <ItemsControl.ItemTemplate>
 			        <DataTemplate DataType="vm:CellVm">
                         <Border BorderBrush="{Binding BorderBrush}" BorderThickness="1" CornerRadius="3" Margin="1"> 

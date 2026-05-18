@@ -93,14 +93,12 @@
 
         <Viewbox Margin="10">
         <ItemsControl ItemsSource="{Binding Cells}" Grid.Row="1" Grid.Column="1">
-		        <!-- поменять панель -->
                 <ItemsControl.ItemsPanel>
 			        <ItemsPanelTemplate>
 				        <UniformGrid Rows="{Binding Height}" Columns="{Binding Width}" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
-                <!-- поменять шаблон данных -->
                 <ItemsControl.ItemTemplate>
 			        <DataTemplate DataType="vm:EditCellVm">
 				        <Border BorderBrush="{Binding BorderBrush}" BorderThickness="1" CornerRadius="3" Margin="1"> 

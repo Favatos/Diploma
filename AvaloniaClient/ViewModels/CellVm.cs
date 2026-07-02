@@ -32,24 +32,8 @@ public partial class CellVm : ViewModelBase
         Col = col;
         Vm = vm;
         this.state = state;
-        //LeftClickCommand = new RelayCommand(HandleLeftClick);
-        //RightClickCommand = new RelayCommand<PointerPressedEventArgs>(HandleRightClick);
         Click = new RelayCommand<PointerPressedEventArgs>(HandleClick);
     }
-
-    //public ICommand LeftClickCommand { get; }
-    //private void HandleLeftClick()
-    //{
-    //    Vm.HandleLeftClick(this);
-    //}
-
-    //public ICommand RightClickCommand { get; }
-    //private void HandleRightClick(PointerPressedEventArgs e)
-    //{
-    //    if (e.GetCurrentPoint(null).Properties.IsRightButtonPressed)
-    //        Vm.HandleRightClick(this);
-    //        //State = State.Crossed;
-    //}
 
     public ICommand Click { get; }
     private void HandleClick(PointerPressedEventArgs e)

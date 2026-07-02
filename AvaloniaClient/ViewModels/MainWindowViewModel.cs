@@ -2,6 +2,7 @@
 using Shared;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AvaloniaClient.ViewModels;
 
@@ -54,8 +55,45 @@ public partial class MainWindowViewModel : ViewModelBase
         }
         else if (right == 0 && current == 2)
         {
-            //GameView.animateError(cell, 2);
             cell.State = State.Crossed;
+        }
+
+        if (Session.IsRowSolved(cell.Row))
+        {
+            for (int col = 0; col < Nonogram.Solution[cell.Row].Length; col++)
+            {
+                if (Session.CurrentGrid[cell.Row][col] == 0)
+                {
+                    Session.CurrentGrid[cell.Row][col] = 2;
+
+                    Session.ColorCellCross(cell.Row, col);
+                    CellVm? c = CellVms.FirstOrDefault(c => (c.Row == cell.Row && c.Col == col));
+
+                    if (c != null)
+                    {
+                        c.State = State.Crossed;
+                    }
+                }
+            }
+        }
+
+        if (Session.IsColSolved(cell.Col))
+        {
+            for (int row = 0; row < Nonogram.Solution.Length; row++)
+            {
+                if (Session.CurrentGrid[row][cell.Col] == 0)
+                {
+                    Session.CurrentGrid[row][cell.Col] = 2;
+
+                    Session.ColorCellCross(row, cell.Col);
+                    CellVm? c = CellVms.FirstOrDefault(c => (c.Row == row && c.Col == cell.Col));
+
+                    if (c != null)
+                    {
+                        c.State = State.Crossed;
+                    }
+                }
+            }
         }
 
         Session.CheckWin();
@@ -84,7 +122,6 @@ public partial class MainWindowViewModel : ViewModelBase
 
         if (right == 1 && current == 0)
         {
-            //GameView.animateError(cell, 1);
             cell.State = State.Colored;
         }
 

@@ -39,8 +39,13 @@ public class DifficultyCalculator
                 result = Difficulty.Hard;
         }
 
-        if (ratio < 0.2)
-            result = Difficulty.Easy;
+        else if (ratio < 0.2 || ratio > 0.7)
+        {
+            if (result == Difficulty.Hard)
+                result = Difficulty.Medium;
+            else if (result == Difficulty.Medium)
+                result = Difficulty.Easy;
+        }
 
         return result;
     }

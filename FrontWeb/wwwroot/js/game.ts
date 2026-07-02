@@ -1,122 +1,122 @@
- class GameSession {
-     nonogramId: number;
-     currentGrid: number[][];
-     solutionGrid: number[][];
-     lives: number;
-     status: "Playing" | "Lost" | "Win";
+class GameSession {
+    nonogramId: number;
+    currentGrid: number[][];
+    solutionGrid: number[][];
+    lives: number;
+    status: "Playing" | "Lost" | "Win";
 
-     constructor(id: number, lives: number, sGrid: number[][]) {
-         this.nonogramId = id;
-         this.solutionGrid = sGrid;
-         this.currentGrid = GameSession.createEmptyGrid(sGrid.length, sGrid[0].length);
-         this.lives = lives;
-         this.status = "Playing";
-     }
+    constructor(id: number, lives: number, sGrid: number[][]) {
+        this.nonogramId = id;
+        this.solutionGrid = sGrid;
+        this.currentGrid = GameSession.createEmptyGrid(sGrid.length, sGrid[0].length);
+        this.lives = lives;
+        this.status = "Playing";
+    }
 
-     static createEmptyGrid(height: number, width: number): number[][] {
-         let grid: number[][] = [];
+    static createEmptyGrid(height: number, width: number): number[][] {
+        let grid: number[][] = [];
 
-         for (let i: number = 0; i < height; i++) {
-             let currentRow: number[] = [];
-             for (let j: number = 0; j < width; j++) {
-                 currentRow.push(0);
-             }
-             grid.push(currentRow);
-         }
+        for (let i: number = 0; i < height; i++) {
+            let currentRow: number[] = [];
+            for (let j: number = 0; j < width; j++) {
+                currentRow.push(0);
+            }
+            grid.push(currentRow);
+        }
 
-         return grid;
-     }
+        return grid;
+    }
 
-     handleLeftClick(row: number, col: number): void {
-         const current = this.currentGrid[row][col];
-         const right = this.solutionGrid[row][col];
+    handleLeftClick(row: number, col: number): void {
+        const current = this.currentGrid[row][col];
+        const right = this.solutionGrid[row][col];
 
         if (right === 1) {
-             if (current !== 1) {
-                 this.currentGrid[row][col] = 1;
-             }
-             return;
-         }
-        
-         this.checkLives();
-         this.currentGrid[row][col] = 2;
-     }
+            if (current !== 1) {
+                this.currentGrid[row][col] = 1;
+            }
+            return;
+        }
 
-     handleRightClick(row: number, col: number): void {
-         const current = this.currentGrid[row][col];
-         const right = this.solutionGrid[row][col];
+        this.checkLives();
+        this.currentGrid[row][col] = 2;
+    }
 
-         if (right === 0) {
-             if (current !== 2) {
-                 this.currentGrid[row][col] = 2;
-             }
-             return;
-         }
+    handleRightClick(row: number, col: number): void {
+        const current = this.currentGrid[row][col];
+        const right = this.solutionGrid[row][col];
 
-         if (current === 1) return;
+        if (right === 0) {
+            if (current !== 2) {
+                this.currentGrid[row][col] = 2;
+            }
+            return;
+        }
 
-         this.checkLives();
-         this.currentGrid[row][col] = 0;
-     }
+        if (current === 1) return;
 
-     checkLives(): void {
-         if (this.lives === -1) return;
+        this.checkLives();
+        this.currentGrid[row][col] = 0;
+    }
 
-         this.lives -= 1;
+    checkLives(): void {
+        if (this.lives === -1) return;
 
-         if (this.lives <= 0) {
-             this.status = "Lost";
-         }
-     }
+        this.lives -= 1;
 
-     checkWin(): boolean {
-         for (let row = 0; row < this.solutionGrid.length; row++) {
-             if (!this.isRowSolved(row)) {
-                 console.log("not win");
-                 return false;
-             }
-         }
+        if (this.lives <= 0) {
+            this.status = "Lost";
+        }
+    }
 
-         this.status = "Win";
-         console.log("win");
-         return true;
-     }
+    checkWin(): boolean {
+        for (let row = 0; row < this.solutionGrid.length; row++) {
+            if (!this.isRowSolved(row)) {
+                console.log("not win");
+                return false;
+            }
+        }
+
+        this.status = "Win";
+        console.log("win");
+        return true;
+    }
 
 
-     isRowSolved(row: number): boolean {
-         for (let col = 0; col < this.solutionGrid[row].length; col++) {
-             const right = this.solutionGrid[row][col];
-             const current = this.currentGrid[row][col];
+    isRowSolved(row: number): boolean {
+        for (let col = 0; col < this.solutionGrid[row].length; col++) {
+            const right = this.solutionGrid[row][col];
+            const current = this.currentGrid[row][col];
 
-             if (right === 1 && current !== 1) {
-                 return false;
-             }
+            if (right === 1 && current !== 1) {
+                return false;
+            }
 
-             if (right === 0 && current === 1) {
-                 return false;
-             }
-         }
-         console.log("right");
-         return true;
-     }
+            if (right === 0 && current === 1) {
+                return false;
+            }
+        }
+        console.log("right");
+        return true;
+    }
 
-     isColSolved(col :number) : boolean{
-         for(let row = 0; row < this.solutionGrid.length; row++){
-             const right = this.solutionGrid[row][col];
-             const current = this.currentGrid[row][col];
+    isColSolved(col: number): boolean {
+        for (let row = 0; row < this.solutionGrid.length; row++) {
+            const right = this.solutionGrid[row][col];
+            const current = this.currentGrid[row][col];
 
-             if (right === 1 && current !== 1) {
-                 return false;
-             }
+            if (right === 1 && current !== 1) {
+                return false;
+            }
 
-             if (right === 0 && current === 1) {
-                 return false;
-             }
-         }
-         console.log("right");
-         return true;
-     }
- }
+            if (right === 0 && current === 1) {
+                return false;
+            }
+        }
+        console.log("right");
+        return true;
+    }
+}
 
 
 class GameView {
@@ -131,10 +131,10 @@ class GameView {
         const col: number = +cell.dataset.col!;
 
         this.session.handleLeftClick(row, col);
-        
+
         const right = this.session.solutionGrid[row][col];
         const current = this.session.currentGrid[row][col];
-        
+
         if (right === 1 && current === 1) {
             GameView.changeCell(cell, 1);
         } else if (right === 0 && current === 2) {
@@ -186,10 +186,10 @@ class GameView {
         }
     }
 
-    updateColHintView(col : number) : void {
+    updateColHintView(col: number): void {
         const colHint = document.querySelector<HTMLElement>(`.col-hint-column[data-col="${col}"]`);
         if (!colHint) return;
-   
+
         if (this.session.isColSolved(col)) {
             colHint.classList.add("hint-done");
             this.changeGridColToCross(col);
@@ -214,8 +214,8 @@ class GameView {
         }
     }
 
-    changeGridColToCross(col : number): void{
-        for (let row = 0; row < this.session.solutionGrid.length; row++){
+    changeGridColToCross(col: number): void {
+        for (let row = 0; row < this.session.solutionGrid.length; row++) {
             if (this.session.currentGrid[row][col] == 0) {
                 this.session.currentGrid[row][col] = 2;
 
@@ -289,7 +289,7 @@ class GameView {
         }
 
         const closeBtn = document.getElementById("game-win-close");
-        if(!closeBtn) return;
+        if (!closeBtn) return;
 
         closeBtn.addEventListener("click", () => {
             modal.classList.add("d-none");
@@ -305,7 +305,7 @@ class GameView {
         if (this.session.status === "Lost") {
             this.showGameOver();
         }
-        if(this.session.status === "Win"){
+        if (this.session.status === "Win") {
             this.showGameWin();
         }
     }
@@ -350,3 +350,31 @@ cells.forEach(c => {
         console.log(c.dataset.row, c.dataset.col);
     });
 });
+
+
+function scaleNonogram(): void {
+    const scaleWrapper = document.querySelector<HTMLElement>(".nonogram-scale-wrapper");
+    const nonogram = document.querySelector<HTMLElement>("#nonogram");
+
+    if (!scaleWrapper || !nonogram) return;
+
+    nonogram.style.transform = "scale(1)";
+
+    const wrapperWidth: number = scaleWrapper.clientWidth;
+    const wrapperHeight: number = scaleWrapper.clientHeight;
+
+    const nonogramWidth: number = nonogram.scrollWidth;
+    const nonogramHeight: number = nonogram.scrollHeight;
+
+    const scaleX: number = wrapperWidth / nonogramWidth;
+    const scaleY: number = wrapperHeight / nonogramHeight;
+
+    let scale: number = Math.min(scaleX, scaleY);
+
+    scale = Math.min(scale, 2.2);
+
+    nonogram.style.transform = `scale(${scale})`;
+}
+
+window.addEventListener("load", scaleNonogram);
+window.addEventListener("resize", scaleNonogram);

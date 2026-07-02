@@ -274,3 +274,21 @@ cells.forEach(function (c) {
         console.log(c.dataset.row, c.dataset.col);
     });
 });
+function scaleNonogram() {
+    var scaleWrapper = document.querySelector(".nonogram-scale-wrapper");
+    var nonogram = document.querySelector("#nonogram");
+    if (!scaleWrapper || !nonogram)
+        return;
+    nonogram.style.transform = "scale(1)";
+    var wrapperWidth = scaleWrapper.clientWidth;
+    var wrapperHeight = scaleWrapper.clientHeight;
+    var nonogramWidth = nonogram.scrollWidth;
+    var nonogramHeight = nonogram.scrollHeight;
+    var scaleX = wrapperWidth / nonogramWidth;
+    var scaleY = wrapperHeight / nonogramHeight;
+    var scale = Math.min(scaleX, scaleY);
+    scale = Math.min(scale, 2.2);
+    nonogram.style.transform = "scale(".concat(scale, ")");
+}
+window.addEventListener("load", scaleNonogram);
+window.addEventListener("resize", scaleNonogram);

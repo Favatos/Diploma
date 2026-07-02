@@ -60,7 +60,18 @@ main {
     height: 90%;
 }
 
+
+.nonogram-scale-wrapper {
+    width: 100%;
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
 .nonogram-wrapper {
+    transform-origin: center;
     display: flex;
     flex-direction: column;
     gap: 8px;
